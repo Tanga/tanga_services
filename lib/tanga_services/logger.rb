@@ -10,7 +10,8 @@ module TangaServices
   #    TangaServices.logger.error({message: "i crashed"})
   class Logger < Syslog::Logger
     def self.application_name=(application_name)
-      @logger ||= Syslog::Logger.new(application_name, Syslog::LOG_LOCAL7)
+      fail "application name already set" if @logger
+      @logger = Syslog::Logger.new(application_name, Syslog::LOG_LOCAL7)
     end
 
     def self.debug(hash)
