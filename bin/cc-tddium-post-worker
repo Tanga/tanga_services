@@ -13,4 +13,4 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
 require 'rubygems'
 require 'bundler/setup'
 
-load Gem.bin_path('tanga_services', 'cc-tddium-post-worker')
+load Gem.bin_path('codeclimate-test-reporter', 'cc-tddium-post-worker')

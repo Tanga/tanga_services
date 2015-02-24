@@ -12,11 +12,6 @@ describe TangaServices do
       expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
       TangaServices.logger.application_name = 'my_app'
     end
-
-    it "shouldn't let you set the name twice" do
-      TangaServices.logger.application_name = 'app'
-      expect { TangaServices.logger.application_name = 'app' }.to raise_error
-    end
   end
 
   context '.log' do
