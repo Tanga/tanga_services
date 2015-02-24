@@ -5,3 +5,6 @@ rvm:
 addons:
   code_climate:
     repo_token: 6480502c92bec9a4fa22e761dbe2c7908c05763c17bbc327af9aebc03e6f5cf1
+notifications:
+  flowdock:
+    secure: e033f1ae3be890c8adfeb1b6ec4a29e4
