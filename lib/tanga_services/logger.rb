@@ -40,23 +40,6 @@ module TangaServices
       data = { level: level, object: hash }
       @logger.send(level, data.to_json)
     end
-
-    def self.i_am_confusing_and_untested
-      if true
-        if false
-          if 3 > 4
-          else
-            fail 'hi'
-          end
-        elsif 3
-          2
-        else
-          throw :hello
-        end
-      else
-        'what?'
-      end
-    end
   end
 
   # Convience access to logger
