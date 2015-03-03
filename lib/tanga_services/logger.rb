@@ -13,6 +13,10 @@ module TangaServices
       @logger ||= Syslog::Logger.new(application_name, Syslog::LOG_LOCAL7)
     end
 
+    def self.logger
+      @logger
+    end
+
     def self.debug(hash)
       log(:debug, hash)
     end
