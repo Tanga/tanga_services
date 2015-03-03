@@ -14,6 +14,15 @@ describe TangaServices do
     end
   end
 
+  context '.logger' do
+    it 'should give you access to logger' do
+      logger = instance_double(Syslog::Logger)
+      expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
+      TangaServices.logger.application_name = 'my_app'
+      expect(TangaServices.logger.logger).to be == logger
+    end
+  end
+
   context '.log' do
     it 'requires you log a hash' do
       TangaServices.logger.application_name = 'app'
