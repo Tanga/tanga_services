@@ -25,6 +25,13 @@ module TangaServices
       log(:info, hash)
     end
 
+    def self.write(message)
+      log(:info, message: message)
+    end
+    class << self
+      alias :<< :write
+    end
+
     def self.warn(hash)
       log(:warn, hash)
     end

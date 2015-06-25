@@ -35,6 +35,22 @@ describe TangaServices do
         raise_error(ArgumentError, "must have application_name set")
     end
 
+    it '#write is an info, can be a string' do
+      logger = instance_double(Syslog::Logger)
+      expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
+      expect(logger).to receive(:info).with({level: :info, object: {message: 'hey there' } }.to_json)
+      TangaServices.logger.application_name = 'my_app'
+      TangaServices.logger.write('hey there')
+    end
+
+    it '#<< is an info, can be a string' do
+      logger = instance_double(Syslog::Logger)
+      expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
+      expect(logger).to receive(:info).with({level: :info, object: {message: 'hey there' } }.to_json)
+      TangaServices.logger.application_name = 'my_app'
+      TangaServices.logger << 'hey there'
+    end
+
     %w( debug info warn error fatal ).each do |method|
       it "should log #{ method}" do
         logger = instance_double(Syslog::Logger)
