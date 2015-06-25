@@ -43,6 +43,11 @@ describe TangaServices do
       TangaServices.logger.write('hey there')
     end
 
+    it 'can set stuff like level=' do
+      TangaServices.logger.application_name = 'my_app'
+      TangaServices.logger.level = 'error'
+    end
+
     it '#<< is an info, can be a string' do
       logger = instance_double(Syslog::Logger)
       expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)

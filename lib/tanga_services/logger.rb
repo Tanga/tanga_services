@@ -50,6 +50,10 @@ module TangaServices
       data = { level: level, object: hash }
       @logger.send(level, data.to_json)
     end
+
+    def self.method_missing(method, *args, &block)
+      logger.send(method, *args, &block)
+    end
   end
 
   # Convience access to logger
