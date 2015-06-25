@@ -24,12 +24,6 @@ describe TangaServices do
   end
 
   context '.log' do
-    it 'requires you log a hash' do
-      TangaServices.logger.application_name = 'app'
-      expect{TangaServices.logger.info('not a hash')}.to \
-        raise_error(ArgumentError, "we just log hashes")
-    end
-
     it 'makes you set application name before' do
       expect{TangaServices.logger.info('not a hash')}.to \
         raise_error(ArgumentError, "must have application_name set")
@@ -54,6 +48,12 @@ describe TangaServices do
       expect(logger).to receive(:info).with({level: :info, object: {message: 'hey there' } }.to_json)
       TangaServices.logger.application_name = 'my_app'
       TangaServices.logger << 'hey there'
+    end
+
+    it 'can log strings' do
+      TangaServices.logger.application_name = 'my_app'
+      TangaServices.logger.info('hello')
+      TangaServices.logger.write('sup')
     end
 
     %w( debug info warn error fatal ).each do |method|

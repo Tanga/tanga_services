@@ -46,6 +46,10 @@ module TangaServices
 
     def self.log(level, hash)
       fail ArgumentError, 'must have application_name set' unless @logger
+      unless hash.is_a?(Hash)
+        hash = { object: hash }
+      end
+
       fail ArgumentError, 'we just log hashes' unless hash.is_a?(Hash)
       data = { level: level, object: hash }
       @logger.send(level, data.to_json)
