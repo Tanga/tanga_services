@@ -10,11 +10,11 @@ module TangaServices
   #    TangaServices.logger.error({message: "i crashed"})
   class Logger < Syslog::Logger
     def self.application_name=(application_name)
-      @logger ||= Syslog::Logger.new(application_name, Syslog::LOG_LOCAL7)
+      @application_name = application_name
     end
 
     def self.logger
-      @logger
+      @logger || Syslog::Logger.new((@application_name || 'unknown'), Syslog::LOG_LOCAL7)
     end
 
     def self.debug(hash)
@@ -45,14 +45,13 @@ module TangaServices
     end
 
     def self.log(level, hash)
-      fail ArgumentError, 'must have application_name set' unless @logger
       unless hash.is_a?(Hash)
         hash = { object: hash }
       end
 
       fail ArgumentError, 'we just log hashes' unless hash.is_a?(Hash)
       data = { level: level, object: hash }
-      @logger.send(level, data.to_json)
+      logger.send(level, data.to_json)
     end
 
     def self.method_missing(method, *args, &block)

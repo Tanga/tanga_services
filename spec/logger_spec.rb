@@ -8,9 +8,10 @@ describe TangaServices do
 
   context '.application_name=' do
     it 'should open the log with application name' do
-      logger = instance_double(Syslog::Logger)
+      logger = instance_double(Syslog::Logger, info: nil)
       expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
       TangaServices.logger.application_name = 'my_app'
+      TangaServices.logger.info(service: 'sup')
     end
   end
 
@@ -24,11 +25,6 @@ describe TangaServices do
   end
 
   context '.log' do
-    it 'makes you set application name before' do
-      expect{TangaServices.logger.info('not a hash')}.to \
-        raise_error(ArgumentError, "must have application_name set")
-    end
-
     it '#write is an info, can be a string' do
       logger = instance_double(Syslog::Logger)
       expect(Syslog::Logger).to receive(:new).with('my_app', Syslog::LOG_LOCAL7).and_return(logger)
