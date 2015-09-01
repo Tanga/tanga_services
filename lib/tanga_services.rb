@@ -5,3 +5,5 @@ require "tanga_services/http"
 module TangaServices
   # Your code goes here...
 end
+
+TS = TangaServices

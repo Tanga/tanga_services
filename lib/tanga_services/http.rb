@@ -2,30 +2,20 @@ require 'httparty'
 require 'http/exceptions'
 require 'json'
 
-module Dino
+module TangaServices
   class HTTP
     class Exception < RuntimeError
     end
 
-    def self.get(*args)
-      new(:get, *args).call
-    end
-
-    def self.put(*args)
-      new(:put, *args).call
-    end
-
-    def self.delete(*args)
-      new(:delete, *args).call
-    end
-
-    def self.post(*args)
-      new(:post, *args).call
+    %i( get put delete post ).each do |method|
+      define_singleton_method(method) do |*args|
+        new(method, *args).call
+      end
     end
 
     def initialize(method, *args)
       @method = method
-      @args = *args
+      @args   = *args
     end
 
     def call
@@ -36,7 +26,7 @@ module Dino
           response
         end
       rescue Http::Exceptions::HttpException, JSON::ParserError
-        fail Dino::HTTP::Exception
+        fail TangaServices::HTTP::Exception
       end
     end
   end
