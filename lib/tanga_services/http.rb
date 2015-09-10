@@ -5,6 +5,9 @@ require 'json'
 module TangaServices
   class HTTP
     class Exception < RuntimeError
+      def to_s
+        cause.to_s
+      end
     end
 
     %i( get put delete post ).each do |method|

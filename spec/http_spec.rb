@@ -15,7 +15,7 @@ describe TS::HTTP do
     VCR.use_cassette('invalid json') do
       expect do
         described_class.get('https://rawgit.com/joevandyk/a370a1fd94a3e6f88e08/raw/9acc356880ee36e8fd1585db1f1c1582ab3c89ad/bad.json')
-      end.to raise_error(described_class::Exception)
+      end.to raise_error(described_class::Exception, /unexpected token/)
     end
   end
 end
