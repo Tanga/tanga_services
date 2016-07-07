@@ -12,7 +12,7 @@ module TangaServices
       end
 
       def code
-        cause.try(:response).code
+        cause.response.code if cause.try(:response)
       end
     end
 

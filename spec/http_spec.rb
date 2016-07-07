@@ -29,4 +29,15 @@ describe TS::HTTP do
       end
     end
   end
+
+  it 'handles response code if no response' do
+    VCR.use_cassette('invalid json') do
+      begin
+        described_class.get('https://rawgit.com/joevandyk/a370a1fd94a3e6f88e08/raw/9acc356880ee36e8fd1585db1f1c1582ab3c89ad/bad.json')
+        fail 'i should not get here'
+      rescue => e
+        expect(e.code).to be nil
+      end
+    end
+  end
 end
