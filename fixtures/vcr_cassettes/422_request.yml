@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://httpbin.org/status/418
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 418
+      message: I'M A TEAPOT
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jul 2016 00:44:29 GMT
+      Content-Length:
+      - '135'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-More-Info:
+      - http://tools.ietf.org/html/rfc2324
+      Access-Control-Allow-Credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: |2
+
+            -=[ teapot ]=-
+
+               _...._
+             .'  _ _ `.
+            | ."` ^ `". _,
+            \_;`"---"`|//
+              |       ;/
+              \_     _/
+                `"""`
+    http_version: 
+  recorded_at: Thu, 07 Jul 2016 00:44:29 GMT
+recorded_with: VCR 2.9.3

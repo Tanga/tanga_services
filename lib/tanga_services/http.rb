@@ -1,12 +1,18 @@
 require 'httparty'
 require 'http/exceptions'
 require 'json'
+require 'active_support'
+require 'active_support/core_ext'
 
 module TangaServices
   class HTTP
     class Exception < RuntimeError
       def to_s
         cause.to_s
+      end
+
+      def code
+        cause.try(:response).code
       end
     end
 

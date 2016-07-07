@@ -18,4 +18,15 @@ describe TS::HTTP do
       end.to raise_error(described_class::Exception, /unexpected token/)
     end
   end
+
+  it 'puts response code on invalid requests' do
+    VCR.use_cassette('422 request') do
+      begin
+        described_class.get('https://httpbin.org/status/418')
+        fail 'i should not get here'
+      rescue => e
+        expect(e.code).to be == 418
+      end
+    end
+  end
 end
